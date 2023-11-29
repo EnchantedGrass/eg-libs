@@ -12,6 +12,12 @@ dependencyResolutionManagement {
     repositories {
         mavenCentral()
         maven("https://www.jitpack.io")
+        maven("https://repo.papermc.io/repository/maven-public/")
+    }
+    versionCatalogs {
+        create("platformLibs") {
+            from(files("gradle/platformLibs.versions.toml"))
+        }
     }
 }
 
