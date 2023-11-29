@@ -1,5 +1,13 @@
 [versions]
 kotlin = "2.0.0-Beta1"
+kotlinx-couroutines = "1.7.3"
+mccoroutine = "2.13.0"
+
+[bundles]
+mccoroutine-bukkit = ["mccoroutine-bukkit-api", "mccoroutine-bukkit-core"]
 
 [libraries]
 kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-couroutines" }
+mccoroutine-bukkit-api = { module = "com.github.shynixn.mccoroutine:mccoroutine-bukkit-api", version.ref = "mccoroutine" }
+mccoroutine-bukkit-core = { module = "com.github.shynixn.mccoroutine:mccoroutine-bukkit-core", version.ref = "mccoroutine" }
