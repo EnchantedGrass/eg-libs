@@ -9,6 +9,7 @@ pluginManagement {
 }
 
 dependencyResolutionManagement {
+    enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
     repositories {
         mavenCentral()
         maven("https://www.jitpack.io")
