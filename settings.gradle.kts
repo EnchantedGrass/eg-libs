@@ -16,8 +16,14 @@ dependencyResolutionManagement {
         maven("https://repo.papermc.io/repository/maven-public/")
     }
     versionCatalogs {
-        create("platformLibs") {
-            from(files("gradle/platformLibs.versions.toml"))
+        val libs by creating {
+            from(files("version-catalogs/libs.versions.toml"))
+        }
+        val paperLibs by creating {
+            from(files("version-catalogs/paperLibs.versions.toml"))
+        }
+        val testLibs by creating {
+            from(files("version-catalogs/testLibs.versions.toml"))
         }
     }
 }

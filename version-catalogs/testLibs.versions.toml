@@ -1,0 +1,7 @@
+[versions]
+mockk = "1.13.8"
+slf4j = "2.0.9"
+
+[libraries]
+mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
+slf4j-simple = { module = "org.slf4j:slf4j-simple", version.ref = "slf4j" }

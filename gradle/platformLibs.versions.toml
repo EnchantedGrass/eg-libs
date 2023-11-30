@@ -1,5 +1,0 @@
-[versions]
-minecraft-server = "1.20.2-R0.1-SNAPSHOT"
-
-[libraries]
-paper-api = { module = "io.papermc.paper:paper-api", version.ref = "minecraft-server" }
