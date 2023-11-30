@@ -18,8 +18,3 @@ interface EgPlugin : SuspendingPlugin, Namespaced {
      */
     override fun namespace(): String
 }
-
-/**
- * Creates new [Key] associated with [EgPlugin] plugin namespace and [value].
- */
-fun EgPlugin.newKey(value: String) = Key.key(this, value) // consider move to separate file

@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test
 import top.enchantedgrass.egLibs.fixtures.plugin.mockkEgJavaPlugin
 import kotlin.test.assertEquals
 
-class EgPluginKtTest {
+class KeyKtTest {
     @Test
     fun `newKey() should create new Key associated with plugin namespace`() {
         val mockk = mockkEgJavaPlugin {
