@@ -1,10 +1,8 @@
 plugins {
-    id("eg-libs.kotlin-conventions")
+    id("eg-libs.paper-conventions")
 }
 
 dependencies {
-    compileOnly(platformLibs.paper.api)
-
     api(libs.kotlinx.coroutines.core)
-    api(libs.bundles.mccoroutine.bukkit)
+    api(paperLibs.bundles.mccoroutine.bukkit)
 }
