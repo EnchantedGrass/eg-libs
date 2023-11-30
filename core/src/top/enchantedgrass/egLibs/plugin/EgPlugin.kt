@@ -1,4 +1,4 @@
-package top.enchantedgrass.egLibs
+package top.enchantedgrass.egLibs.plugin
 
 import com.github.shynixn.mccoroutine.bukkit.SuspendingPlugin
 import net.kyori.adventure.key.Key
@@ -11,9 +11,15 @@ interface EgPlugin : SuspendingPlugin, Namespaced {
      * The directory may not exist.
      */
     val dataDirectory: Path
+
+    /**
+     * The plugin's namespace.
+     * Use to create [Key]s associated with this plugin.
+     */
+    override fun namespace(): String
 }
 
 /**
  * Creates new [Key] associated with [EgPlugin] plugin namespace and [value].
  */
-fun EgPlugin.newKey(value: String) = Key.key(this, value)
+fun EgPlugin.newKey(value: String) = Key.key(this, value) // consider move to separate file
