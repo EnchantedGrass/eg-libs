@@ -20,5 +20,5 @@ class TestPluginClassLoader : ClassLoader(), ConfiguredPluginClassLoader {
 
     override fun getPlugin() = holder
 
-    override fun getGroup() = TODO()
+    override fun getGroup() = throw NotImplementedError()
 }
