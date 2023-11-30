@@ -6,8 +6,11 @@ dependencyResolutionManagement {
         gradlePluginPortal()
     }
     versionCatalogs {
-        register("libs") {
+        val libs by registering {
             from(files("../version-catalogs/libs.versions.toml"))
+        }
+        val testLibs by registering {
+            from(files("../version-catalogs/testLibs.versions.toml"))
         }
     }
 }
