@@ -2,7 +2,6 @@
 kotlin = "2.0.0-Beta1"
 kotlinx-couroutines = "1.7.3"
 jackson = "2.16.0"
-yaml-config-updater = "1.4.2"
 
 [libraries]
 kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
@@ -10,4 +9,3 @@ kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-c
 jackson-bom = { module = "com.fasterxml.jackson:jackson-bom", version.ref = "jackson" }
 jackson-module-kotlin = { module = "com.fasterxml.jackson.module:jackson-module-kotlin" }
 jackson-dataformat-yaml = { module = "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml" }
-yaml-config-updater = { module = "ru.vyarus:yaml-config-updater", version.ref = "yaml-config-updater" }
