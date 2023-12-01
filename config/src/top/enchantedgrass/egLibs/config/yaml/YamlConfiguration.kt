@@ -13,13 +13,14 @@ import kotlin.reflect.safeCast
 private const val YAML_FILE_EXTENSION = ".yml"
 
 class YamlConfiguration internal constructor(
+    private val registry: YamlConfigurationRegistry,
     name: String,
     private val type: KClass<*>,
     override val key: Key,
 ) : Configuration {
     private val yamlPathString by lazy { this.name + YAML_FILE_EXTENSION }
-    private val defaultResource get() = YamlConfigurationRegistry.getResource(yamlPathString)
-    private val configPath get() = YamlConfigurationRegistry.dataDirectory.resolve(yamlPathString)
+    private val defaultResource get() = registry.getDefaultResource(yamlPathString)
+    private val configPath get() = registry.dataDirectory.resolve(yamlPathString)
 
     private var cache: Any? = null
 
@@ -37,12 +38,12 @@ class YamlConfiguration internal constructor(
     }
 
     override fun onRegister() {
-        cache = YamlConfigurationRegistry.mapper.readValue(configPath.readYaml(), type.java)
+        cache = registry.mapper.readValue(configPath.readYaml(), type.java)
     }
 
     override fun onUnregister() {
         cache = null
-        YamlConfigurationRegistry.logger?.info("Unloaded configuration $name")
+        registry.logger?.info("Unloaded configuration $name")
     }
 
     private fun Path.readYaml(): ByteArray {
