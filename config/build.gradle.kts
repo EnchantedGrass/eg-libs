@@ -3,13 +3,11 @@ plugins {
 }
 
 dependencies {
-    compileOnly(paperLibs.paper.api)
-    compileOnly(projects.egLibsCore)
-
+    implementation(projects.egLibsRegistry)
     implementation(platform(libs.jackson.bom))
     implementation(libs.jackson.module.kotlin)
     implementation(libs.jackson.dataformat.yaml)
     implementation(libs.yaml.config.updater)
-    implementation(projects.egLibsCore)
-    testImplementation(paperLibs.paper.api)
+
+    compileOnly(paperLibs.adventure.key)
 }

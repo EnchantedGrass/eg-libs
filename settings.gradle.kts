@@ -34,7 +34,7 @@ plugins {
 
 rootProject.name = "eg-libs"
 
-setOf("core", "config").forEach {
+setOf("registry", "core", "config").forEach {
     val subprojectName = ":eg-libs-$it"
     include(subprojectName)
     project(subprojectName).projectDir = file(it)
