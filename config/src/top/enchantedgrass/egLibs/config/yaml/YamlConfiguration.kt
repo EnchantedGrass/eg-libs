@@ -3,10 +3,7 @@ package top.enchantedgrass.egLibs.config.yaml
 import net.kyori.adventure.key.Key
 import top.enchantedgrass.egLibs.config.Configuration
 import java.nio.file.Path
-import kotlin.io.path.createParentDirectories
-import kotlin.io.path.notExists
-import kotlin.io.path.outputStream
-import kotlin.io.path.readBytes
+import kotlin.io.path.*
 import kotlin.reflect.KClass
 import kotlin.reflect.safeCast
 
@@ -50,6 +47,7 @@ class YamlConfiguration internal constructor(
     private fun Path.readYaml(): ByteArray {
         if (notExists()) {
             createParentDirectories()
+            createFile()
             defaultResource?.let { defaultResource ->
                 defaultResource.use { inputStream ->
                     outputStream().use { inputStream.transferTo(it) }
