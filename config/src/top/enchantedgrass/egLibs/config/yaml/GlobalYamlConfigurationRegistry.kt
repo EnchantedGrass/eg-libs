@@ -1,18 +1,24 @@
 package top.enchantedgrass.egLibs.config.yaml
 
-import org.slf4j.Logger
 import top.enchantedgrass.egLibs.config.ConfigurationRegistry
-import kotlin.reflect.KClass
+import top.enchantedgrass.egLibs.config.yaml.GlobalYamlConfigurationRegistry.init
 
+private val globalInstance = YamlConfigurationRegistry()
+private var isInitialized = false
 
-object GlobalYamlConfigurationRegistry : ConfigurationRegistry<YamlConfiguration>() {
-    private val
-    override var logger: Logger?
-        get() = TODO("Not yet implemented")
-        set(value) {}
-
-    override fun <T : Any> create(name: String, type: KClass<T>): YamlConfiguration {
-        TODO("Not yet implemented")
+/**
+ * A global [YamlConfigurationRegistry] instance.
+ *
+ * __Notes:__ Call [init] before using this instance.
+ */
+object GlobalYamlConfigurationRegistry : ConfigurationRegistry<YamlConfiguration> by globalInstance {
+    /**
+     * Initializes the global [YamlConfigurationRegistry] instance.
+     * @throws IllegalStateException if the global instance is already initialized.
+     */
+    fun init(block: YamlConfigurationRegistry.Builder.() -> Unit) {
+        check(!isInitialized) { "Registry is already initialized!" }
+        globalInstance.builder.apply(block)
+        isInitialized = true
     }
-
 }
