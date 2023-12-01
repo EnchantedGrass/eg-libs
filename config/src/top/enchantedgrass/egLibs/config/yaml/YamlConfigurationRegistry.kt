@@ -15,13 +15,18 @@ import kotlin.reflect.KClass
 /**
  * The container to load and store [YamlConfiguration]s.
  */
-class YamlConfigurationRegistry internal constructor(builder: Builder) : ConfigurationRegistry<YamlConfiguration>() {
-    internal val mapper = builder.mapper
-    internal val dataDirectory = builder.dataDirectory
-    internal val getDefaultResource = builder.getDefaultResource
-    private val keyFactory = builder.keyFactory
+class YamlConfigurationRegistry internal constructor(internal val builder: Builder) :
+    ConfigurationRegistry<YamlConfiguration>() {
+    internal val mapper by lazy { builder.mapper }
+    internal val dataDirectory by lazy { builder.dataDirectory }
+    internal val getDefaultResource by lazy { builder.getDefaultResource }
+    private val keyFactory by lazy { builder.keyFactory }
 
-    override var logger: Logger? = builder.logger
+    override var logger: Logger?
+        get() = builder.logger
+        set(value) {
+            builder.logger = value
+        }
 
     override fun <T : Any> create(name: String, type: KClass<T>) = YamlConfiguration(this, name, type, keyFactory(name))
 
