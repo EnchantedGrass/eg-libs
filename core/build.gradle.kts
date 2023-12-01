@@ -7,5 +7,7 @@ dependencies {
     api(libs.kotlinx.coroutines.core)
     api(paperLibs.bundles.mccoroutine.bukkit)
 
+    implementation(paperLibs.minedown)
+
     testFixturesCompileOnly(testLibs.mockk)
 }
