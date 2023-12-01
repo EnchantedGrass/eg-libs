@@ -60,6 +60,7 @@ open class YamlConfigurationRegistry internal constructor(internal val builder: 
          * Configures the [mapper] with the specified [block].
          * @return this [Builder] instance.
          */
+        @Suppress("MemberVisibilityCanBePrivate", "unused")
         fun mapper(block: YAMLMapper.() -> Unit): Builder {
             mapper.apply(block)
             return this
