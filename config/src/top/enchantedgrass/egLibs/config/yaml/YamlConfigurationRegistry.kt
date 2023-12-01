@@ -7,7 +7,7 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLMapper
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import net.kyori.adventure.key.Key
 import org.slf4j.Logger
-import top.enchantedgrass.egLibs.config.ConfigurationRegistry
+import top.enchantedgrass.egLibs.config.AbstractConfigurationRegistry
 import java.io.InputStream
 import java.nio.file.Path
 import kotlin.reflect.KClass
@@ -15,8 +15,8 @@ import kotlin.reflect.KClass
 /**
  * The container to load and store [YamlConfiguration]s.
  */
-class YamlConfigurationRegistry internal constructor(internal val builder: Builder) :
-    ConfigurationRegistry<YamlConfiguration>() {
+open class YamlConfigurationRegistry internal constructor(internal val builder: Builder) :
+    AbstractConfigurationRegistry<YamlConfiguration>() {
     internal val mapper by lazy { builder.mapper }
     internal val dataDirectory by lazy { builder.dataDirectory }
     internal val getDefaultResource by lazy { builder.getDefaultResource }
@@ -56,8 +56,11 @@ class YamlConfigurationRegistry internal constructor(internal val builder: Build
         var logger: Logger? = null
 
         init {
-            mapper.setPropertyNamingStrategy(PropertyNamingStrategies.KEBAB_CASE)
-                .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES).registerKotlinModule()
+            mapper.apply {
+                setPropertyNamingStrategy(PropertyNamingStrategies.KEBAB_CASE)
+                disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+                registerKotlinModule()
+            }
         }
     }
 }
@@ -65,5 +68,5 @@ class YamlConfigurationRegistry internal constructor(internal val builder: Build
 /**
  * Creates a new [YamlConfigurationRegistry] with [builder].
  */
-fun YamlConfigurationRegistry(builder: YamlConfigurationRegistry.Builder.() -> Unit) =
+fun YamlConfigurationRegistry(builder: YamlConfigurationRegistry.Builder.() -> Unit = {}) =
     YamlConfigurationRegistry(YamlConfigurationRegistry.Builder().apply(builder))
