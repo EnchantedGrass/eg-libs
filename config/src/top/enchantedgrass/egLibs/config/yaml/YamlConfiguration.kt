@@ -16,7 +16,6 @@ class YamlConfiguration internal constructor(
     private val registry: YamlConfigurationRegistry,
     name: String,
     private val type: KClass<*>,
-    override val key: Key,
 ) : Configuration {
     private val yamlPathString by lazy { this.name + YAML_FILE_EXTENSION }
     private val defaultResource get() = registry.getDefaultResource(yamlPathString)
@@ -36,6 +35,8 @@ class YamlConfiguration internal constructor(
         onUnregister()
         onRegister()
     }
+
+    override val key: Key = registry.keyFactory(name)
 
     override fun onRegister() {
         cache = registry.mapper.readValue(configPath.readYaml(), type.java)

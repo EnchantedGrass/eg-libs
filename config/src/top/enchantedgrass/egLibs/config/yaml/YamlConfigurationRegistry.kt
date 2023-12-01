@@ -20,11 +20,11 @@ open class YamlConfigurationRegistry internal constructor(internal val builder: 
     internal val mapper by lazy { builder.mapper }
     internal val dataDirectory by lazy { builder.dataDirectory }
     internal val getDefaultResource by lazy { builder.getDefaultResource }
-    private val keyFactory by lazy { builder.keyFactory }
+    internal val keyFactory by lazy { builder.keyFactory }
 
     override val logger get() = builder.logger
 
-    override fun <T : Any> create(name: String, type: KClass<T>) = YamlConfiguration(this, name, type, keyFactory(name))
+    override fun <T : Any> create(name: String, type: KClass<T>) = YamlConfiguration(this, name, type)
 
     /**
      * The builder for [YamlConfigurationRegistry].
