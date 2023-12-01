@@ -19,14 +19,16 @@ abstract class AbstractConfigurationRegistry<C : Configuration>(
 
     /**
      * Loads and registers a configuration with the specified [id] and [type].
+     * If the configuration is already loaded, it will return the loaded configuration.
      */
     override fun <T : Any> load(id: ConfigId, type: KClass<T>): C {
-        val config = create(id, type)
-        if (register(config)) {
-            logger?.info("Loaded configuration $id")
-        } else {
+        if (id in delegate) {
             logger?.warn("Configuration $id is already loaded!")
+            return delegate[id]
         }
+        val config = create(id, type)
+        require(register(config))
+        logger?.info("Loaded configuration $id")
         return config
     }
 
