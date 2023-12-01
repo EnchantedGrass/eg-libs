@@ -1,18 +1,13 @@
 package top.enchantedgrass.egLibs.registry
 
-import net.kyori.adventure.key.Key
-import net.kyori.adventure.key.Keyed
-
 /**
  * Represents an object that can be registered to a [Registry].
  */
-interface Registrable : Keyed {
+interface Registrable<ID> {
     /**
-     * The key of this object.
+     * The object's id.
      */
-    val key: Key
-
-    override fun key(): Key = key
+    val id: ID
 
     /**
      * Invokes when this object is registered to a [Registry].

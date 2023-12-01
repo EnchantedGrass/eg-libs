@@ -3,18 +3,17 @@ package top.enchantedgrass.egLibs.registry
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
-import net.kyori.adventure.key.Key
 import kotlin.test.*
 
 class RegistryImplTest {
     @Test
     fun `register should add registrable to map and call onRegister`() {
-        val key = Key.key("test")
-        val registrable = mockk<Registrable>(relaxed = true) {
-            every { key() } returns key
+        val testId = "test"
+        val registrable = mockk<Registrable<String>>(relaxed = true) {
+            every { id } returns testId
         }
 
-        val registry = RegistryImpl<Registrable>()
+        val registry = RegistryImpl<String, Registrable<String>>()
 
         assertTrue(registry.register(registrable))
         verify { registrable.onRegister() }
@@ -22,12 +21,12 @@ class RegistryImplTest {
 
     @Test
     fun `register should not add registrable to map if it already exists`() {
-        val key = Key.key("test")
-        val registrable = mockk<Registrable>(relaxed = true) {
-            every { key() } returns key
+        val testId = "test"
+        val registrable = mockk<Registrable<String>>(relaxed = true) {
+            every { id } returns testId
         }
 
-        val registry = RegistryImpl<Registrable>()
+        val registry = RegistryImpl<String, Registrable<String>>()
         registry += registrable
 
         assertFalse(registry.register(registrable))
@@ -35,87 +34,88 @@ class RegistryImplTest {
 
     @Test
     fun `unregister should remove registrable from map and call onUnregister`() {
-        val key = Key.key("test")
-        val registrable = mockk<Registrable>(relaxed = true) {
-            every { key() } returns key
+        val testId = "test"
+        val registrable = mockk<Registrable<String>>(relaxed = true) {
+            every { id } returns testId
         }
 
-        val registry = RegistryImpl<Registrable>()
+        val registry = RegistryImpl<String, Registrable<String>>()
         registry.register(registrable)
 
-        assertTrue(registry.unregister(key))
+        assertTrue(registry.unregister(testId))
         verify { registrable.onUnregister() }
     }
 
     @Test
     fun `unregister should not remove registrable from map if it does not exist`() {
-        val key = Key.key("test")
-        val registry = RegistryImpl<Registrable>()
+        val testId = "test"
+        val registry = RegistryImpl<String, Registrable<String>>()
 
-        assertFalse(registry.unregister(key))
+        assertFalse(registry.unregister(testId))
     }
 
     @Test
     fun `find should return registrable if it exists`() {
-        val key = Key.key("test")
-        val registrable = mockk<Registrable>(relaxed = true) {
-            every { key() } returns key
+        val testId = "test"
+        val registrable = mockk<Registrable<String>>(relaxed = true) {
+            every { id } returns testId
         }
 
-        val registry = RegistryImpl<Registrable>()
+        val registry = RegistryImpl<String, Registrable<String>>()
         registry.register(registrable)
 
-        assertNotNull(registry.find(key))
+        assertNotNull(registry.find(testId))
     }
 
     @Test
     fun `find should return null if registrable does not exist`() {
-        val key = Key.key("test")
-        val registry = RegistryImpl<Registrable>()
+        val testId = "test"
+        val registry = RegistryImpl<String, Registrable<String>>()
 
-        assertNull(registry.find(key))
+        assertNull(registry.find(testId))
     }
 
     @Test
     fun `get should return registrable if it exists`() {
-        val key = Key.key("test")
-        val registrable = mockk<Registrable>(relaxed = true)
-        every { registrable.key() } returns key
+        val testId = "test"
+        val registrable = mockk<Registrable<String>>(relaxed = true) {
+            every { id } returns testId
+        }
 
-        val registry = RegistryImpl<Registrable>()
+        val registry = RegistryImpl<String, Registrable<String>>()
         registry += registrable
 
-        assertNotNull(registry[key])
+        assertNotNull(registry[testId])
     }
 
     @Test
     fun `get should throw exception if registrable does not exist`() {
-        val key = Key.key("test")
-        val registry = RegistryImpl<Registrable>()
+        val testId = "test"
+        val registry = RegistryImpl<String, Registrable<String>>()
 
-        assertFailsWith<IllegalStateException>("No registrable found for key $key") {
-            registry[key]
+        assertFailsWith<IllegalStateException>("No registrable found for id $testId") {
+            registry[testId]
         }
     }
 
     @Test
     fun `contains should return true if registrable exists`() {
-        val key = Key.key("test")
-        val registrable = mockk<Registrable>(relaxed = true) {
-            every { key() } returns key
+        val testId = "test"
+        val registrable = mockk<Registrable<String>>(relaxed = true) {
+            every { id } returns testId
         }
 
-        val registry = RegistryImpl<Registrable>()
+        val registry = RegistryImpl<String, Registrable<String>>()
         registry += registrable
 
-        assertTrue(key in registry)
+        assertTrue(testId in registry)
     }
 
     @Test
     fun `contains should return false if registrable does not exist`() {
-        val key = Key.key("test")
-        val registry = RegistryImpl<Registrable>()
+        val testId = "test"
+        val registry = RegistryImpl<String, Registrable<String>>()
 
-        assertFalse(key in registry)
+        assertFalse(testId in registry)
     }
 }

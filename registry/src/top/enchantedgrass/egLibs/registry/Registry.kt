@@ -1,11 +1,9 @@
 package top.enchantedgrass.egLibs.registry
 
-import net.kyori.adventure.key.Key
-
 /**
  * Represents a registry that can register [Registrable] objects.
  */
-interface Registry<T : Registrable> : MutableIterable<T> {
+interface Registry<ID, T : Registrable<ID>> : MutableIterable<T> {
     /**
      * Registers [registrable] to this registry.
      * @return false if the [Registrable] object was already registered.
@@ -13,36 +11,36 @@ interface Registry<T : Registrable> : MutableIterable<T> {
     fun register(registrable: T): Boolean
 
     /**
-     * Unregisters the [Registrable] object associated with [key] from this registry.
+     * Unregisters the [Registrable] object associated with [id] from this registry.
      * @return false if the [Registrable] object was not registered.
      */
-    fun unregister(key: Key): Boolean
+    fun unregister(id: ID): Boolean
 
     /**
-     * Finds a registrable item by its [key].
+     * Finds a registrable item by its [id].
      */
-    fun find(key: Key): T?
+    fun find(id: ID): T?
 
     /**
-     * Retrieves a registrable item by its [key].
+     * Retrieves a registrable item by its [id].
      */
-    operator fun get(key: Key): T
+    operator fun get(id: ID): T
 
     /**
-     * Checks if a registrable item is in the registry by its [key].
+     * Checks if a registrable item is in the registry by its [id].
      */
-    operator fun contains(key: Key): Boolean
+    operator fun contains(id: ID): Boolean
 }
 
-operator fun <T : Registrable> Registry<T>.plusAssign(registrable: T) {
+operator fun <ID, T : Registrable<ID>> Registry<ID, T>.plusAssign(registrable: T) {
     register(registrable)
 }
 
-operator fun <T : Registrable> Registry<T>.minusAssign(key: Key) {
-    unregister(key)
+operator fun <ID, T : Registrable<ID>> Registry<ID, T>.minusAssign(id: ID) {
+    unregister(id)
 }
 
 /**
  * Creates a new [Registry].
  */
-fun <T : Registrable> Registry(): Registry<T> = RegistryImpl()
+fun <ID, T : Registrable<ID>> Registry(): Registry<ID, T> = RegistryImpl()
