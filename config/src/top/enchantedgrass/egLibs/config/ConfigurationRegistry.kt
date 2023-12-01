@@ -7,8 +7,8 @@ import kotlin.reflect.KClass
 /**
  * Represents a configuration registry.
  */
-abstract class ConfigurationRegistry<C : Configuration>(delegate: Registry<C> = Registry()) : Registry<C> by delegate {
-    internal abstract var logger: Logger?
+abstract class ConfigurationRegistry<C : Configuration>(internal val delegate: Registry<C> = Registry()) : Registry<C> by delegate {
+    internal abstract val logger: Logger?
 
     /**
      * Loads and registers a configuration with the specified [name] and [type].

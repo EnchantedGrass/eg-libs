@@ -22,11 +22,7 @@ class YamlConfigurationRegistry internal constructor(internal val builder: Build
     internal val getDefaultResource by lazy { builder.getDefaultResource }
     private val keyFactory by lazy { builder.keyFactory }
 
-    override var logger: Logger?
-        get() = builder.logger
-        set(value) {
-            builder.logger = value
-        }
+    override val logger get() = builder.logger
 
     override fun <T : Any> create(name: String, type: KClass<T>) = YamlConfiguration(this, name, type, keyFactory(name))
 
