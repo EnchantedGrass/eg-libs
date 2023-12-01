@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategies
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory
 import com.fasterxml.jackson.dataformat.yaml.YAMLMapper
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
-import net.kyori.adventure.key.Key
 import org.slf4j.Logger
 import top.enchantedgrass.egLibs.config.AbstractConfigurationRegistry
 import java.io.InputStream
@@ -20,11 +19,10 @@ open class YamlConfigurationRegistry internal constructor(internal val builder: 
     internal val mapper by lazy { builder.mapper }
     internal val dataDirectory by lazy { builder.dataDirectory }
     internal val getDefaultResource by lazy { builder.getDefaultResource }
-    internal val keyFactory by lazy { builder.keyFactory }
 
     override val logger get() = builder.logger
 
-    override fun <T : Any> create(name: String, type: KClass<T>) = YamlConfiguration(this, name, type)
+    override fun <T : Any> create(id: String, type: KClass<T>) = YamlConfiguration(this, id, type)
 
     /**
      * The builder for [YamlConfigurationRegistry].
@@ -34,11 +32,6 @@ open class YamlConfigurationRegistry internal constructor(internal val builder: 
          * The [YAMLMapper] to use it for deserialization configurations.
          */
         var mapper: YAMLMapper = YAMLMapper(YAMLFactory())
-
-        /**
-         * The [Key] factory to create a [Key] for [YamlConfiguration].
-         */
-        var keyFactory: (String) -> Key = { Key.key(it) }
 
         /**
          * The directory to store configurations.

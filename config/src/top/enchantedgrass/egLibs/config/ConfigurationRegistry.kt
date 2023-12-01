@@ -6,9 +6,9 @@ import kotlin.reflect.KClass
 /**
  * Represents a configuration registry.
  */
-interface ConfigurationRegistry<C : Configuration> : Registry<C> {
+interface ConfigurationRegistry<C : Configuration> : Registry<ConfigId, C> {
     /**
-     * Loads and registers a configuration with the specified [name] and [type].
+     * Loads and registers a configuration with the specified [id] and [type].
      */
-    fun <T : Any> load(name: String, type: KClass<T>): C
+    fun <T : Any> load(id: ConfigId, type: KClass<T>): C
 }

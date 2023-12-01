@@ -5,15 +5,14 @@ import kotlin.reflect.KClass
 import kotlin.reflect.KProperty
 
 /**
+ * Represents a configuration id. Used for determining the configuration path.
+ */
+typealias ConfigId = String
+
+/**
  * Represents a container for a configuration object.
  */
-interface Configuration : Registrable {
-    /**
-     * The name of this configuration.
-     * This is used to determine the path of the configuration.
-     */
-    val name: String
-
+interface Configuration : Registrable<ConfigId> {
     /**
      * Unwraps this configuration to the specified [type].
      * @throws IllegalArgumentException if this configuration is not of type [type].

@@ -8,6 +8,5 @@ dependencies {
     api(libs.jackson.module.kotlin)
     api(libs.jackson.dataformat.yaml)
 
-    compileOnly(paperLibs.adventure.key)
     compileOnly(libs.slf4j.api)
 }
