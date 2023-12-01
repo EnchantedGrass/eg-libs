@@ -28,7 +28,7 @@ class YamlConfiguration internal constructor(
 
     override fun <T : Any> unwrap(type: KClass<T>): T {
         checkNotNull(cache) { "Configuration $name is not registered yet." }
-        check(type.isInstance(cache)) { "Configuration $name is not of type ${type.qualifiedName}." }
+        require(type.isInstance(cache)) { "Configuration $name is not of type ${type.qualifiedName}." }
         return type.safeCast(cache) ?: error("Cannot cast ${cache!!::class.qualifiedName} to ${type.qualifiedName}.")
     }
 

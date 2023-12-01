@@ -16,6 +16,7 @@ interface Configuration : Registrable {
 
     /**
      * Unwraps this configuration to the specified [type].
+     * @throws IllegalArgumentException if this configuration is not of type [type].
      */
     fun <T : Any> unwrap(type: KClass<T>): T
 
