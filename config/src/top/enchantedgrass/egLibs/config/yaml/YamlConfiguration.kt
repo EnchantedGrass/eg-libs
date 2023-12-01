@@ -54,6 +54,6 @@ class YamlConfiguration internal constructor(
                 }
             }
         }
-        return readBytes()
+        return readBytes().takeIf { it.isNotEmpty() } ?: "{}".toByteArray()
     }
 }
