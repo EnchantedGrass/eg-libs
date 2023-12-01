@@ -55,6 +55,24 @@ open class YamlConfigurationRegistry internal constructor(internal val builder: 
                 registerKotlinModule()
             }
         }
+
+        /**
+         * Configures the [mapper] with the specified [block].
+         * @return this [Builder] instance.
+         */
+        fun mapper(block: YAMLMapper.() -> Unit): Builder {
+            mapper.apply(block)
+            return this
+        }
+
+        /**
+         * Sets the [fn] to get the default resource for the specified configuration name.
+         * @return this [Builder] instance.
+         */
+        fun defaultResource(fn: (String) -> InputStream?): Builder {
+            this.getDefaultResource = fn
+            return this
+        }
     }
 }
 
