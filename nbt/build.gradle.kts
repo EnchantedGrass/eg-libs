@@ -3,8 +3,13 @@ plugins {
     alias(libs.plugins.shadow)
 }
 
+val itemNbtApi: Configuration by configurations.creating {
+    isCanBeResolved = true
+    isCanBeConsumed = false
+}
+
 dependencies {
-    shadow(paperLibs.item.nbt.api)
+    itemNbtApi(paperLibs.item.nbt.api)
 }
 
 tasks {
@@ -13,7 +18,7 @@ tasks {
     }
 
     shadowJar {
-        configurations = listOf(project.configurations.shadow.get())
+        configurations = listOf(itemNbtApi)
         relocate("de.tr7zw.changeme.nbtapi", "top.enchantedgrass.egLibs.nbt")
     }
 }
