@@ -14,6 +14,7 @@ dependencyResolutionManagement {
         mavenCentral()
         maven("https://www.jitpack.io")
         maven("https://repo.papermc.io/repository/maven-public/")
+        maven("https://repo.codemc.io/repository/maven-public/")
     }
     versionCatalogs {
         val libs by creating {
@@ -34,7 +35,7 @@ plugins {
 
 rootProject.name = "eg-libs"
 
-setOf("registry", "core", "config").forEach {
+setOf("registry", "core", "config", "nbt").forEach {
     val subprojectName = ":eg-libs-$it"
     include(subprojectName)
     project(subprojectName).projectDir = file(it)

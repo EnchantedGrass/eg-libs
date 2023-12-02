@@ -1,5 +1,6 @@
 [versions]
 kotlin = "2.0.0-Beta1"
+shadow = "8.1.1"
 kotlinx-couroutines = "1.7.3"
 jackson = "2.16.0"
 slf4j = "2.0.9"
@@ -11,3 +12,6 @@ jackson-bom = { module = "com.fasterxml.jackson:jackson-bom", version.ref = "jac
 jackson-module-kotlin = { module = "com.fasterxml.jackson.module:jackson-module-kotlin" }
 jackson-dataformat-yaml = { module = "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml" }
 slf4j-api = { module = "org.slf4j:slf4j-api", version.ref = "slf4j" }
+
+[plugins]
+shadow = { id = "com.github.johnrengelman.shadow", version.ref = "shadow" }

@@ -6,6 +6,7 @@ plugins {
 dependencies {
     api(libs.kotlinx.coroutines.core)
     api(paperLibs.bundles.mccoroutine.bukkit)
+    api(projects.egLibsNbt.apply { targetConfiguration = "shadow" })
 
     implementation(paperLibs.minedown)
 

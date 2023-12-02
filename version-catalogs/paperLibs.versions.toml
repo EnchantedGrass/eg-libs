@@ -3,6 +3,7 @@ paper = "1.20.2-R0.1-SNAPSHOT"
 mccoroutine = "2.13.0"
 adventure = "4.14.0"
 minedown = "kyori-adventure-SNAPSHOT"
+item-nbt-api = "2.12.1"
 
 [bundles]
 mccoroutine-bukkit = ["mccoroutine-bukkit-api", "mccoroutine-bukkit-core"]
@@ -13,3 +14,4 @@ mccoroutine-bukkit-api = { module = "com.github.shynixn.mccoroutine:mccoroutine-
 mccoroutine-bukkit-core = { module = "com.github.shynixn.mccoroutine:mccoroutine-bukkit-core", version.ref = "mccoroutine" }
 adventure-key = { module = "net.kyori:adventure-key", version.ref = "adventure" }
 minedown = { module = "com.github.Phoenix616:MineDown", version.ref = "minedown" }
+item-nbt-api = { module = "de.tr7zw:item-nbt-api", version.ref = "item-nbt-api" }
