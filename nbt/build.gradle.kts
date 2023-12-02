@@ -4,9 +4,16 @@ plugins {
 }
 
 dependencies {
-    api(paperLibs.item.nbt.api)
+    shadow(paperLibs.item.nbt.api)
 }
 
-tasks.shadowJar {
-    relocate("de.tr7zw.changeme.nbtapi", "top.enchantedgrass.egLibs.nbt")
+tasks {
+    processResources {
+        duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    }
+
+    shadowJar {
+        configurations = listOf(project.configurations.shadow.get())
+        relocate("de.tr7zw.changeme.nbtapi", "top.enchantedgrass.egLibs.nbt")
+    }
 }
