@@ -4,9 +4,12 @@ plugins {
 }
 
 dependencies {
+    api(projects.egLibsNbt.apply { targetConfiguration = "shadow" })
     api(libs.kotlinx.coroutines.core)
     api(paperLibs.bundles.mccoroutine.bukkit)
-    api(projects.egLibsNbt.apply { targetConfiguration = "shadow" })
+    api(platform(libs.jackson.bom))
+    api(libs.jackson.module.kotlin)
+    api(libs.jackson.dataformat.yaml)
 
     implementation(paperLibs.minedown)
 
