@@ -70,14 +70,16 @@ class FastItemStackConverter(private val fastStack: FastItemStack) {
     private fun prepareAmount() = determineProp(FastItemStack::amount) ?: 1
 
     private fun prepareDisplayNameComponent(placeholders: List<Placeholder>): Component? {
-        val component = determineProp(FastItemStack::displayName)
-            ?.mdc(placeholders + listOf("current" to (fastStack.displayName ?: "")))
+        val component = determineProp(FastItemStack::displayName)?.mdc(
+            placeholders + listOf(
+                "current" to (fastStack.displayName ?: "")
+            )
+        )
         return component?.decoration(TextDecoration.ITALIC, false)
     }
 
     private fun prepareLoreComponent(placeholders: List<Placeholder>): List<Component>? {
-        val loreComponents = determineProp(FastItemStack::lore)
-            ?.trimEnd('\n', ' ')
+        val loreComponents = determineProp(FastItemStack::lore)?.trimEnd('\n', ' ')
             ?.mdcList(placeholders + listOf("current" to (fastStack.lore ?: "")))
         return loreComponents?.map { it.decoration(TextDecoration.ITALIC, false) }
     }
@@ -155,3 +157,12 @@ class FastItemStackConverter(private val fastStack: FastItemStack) {
         if (this is M) block()
     }
 }
+
+/**
+ * Converts the FastItemStack to a Bukkit ItemStack.
+ *
+ * @param placeholders The list of placeholders to be replaced in the item properties.
+ * @return The converted Bukkit ItemStack.
+ */
+fun FastItemStack.asBukkit(placeholders: List<Placeholder> = emptyList()) =
+    FastItemStackConverter(this).asBukkit(placeholders)
