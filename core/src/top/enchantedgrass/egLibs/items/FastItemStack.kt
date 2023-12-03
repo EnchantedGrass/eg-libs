@@ -1,10 +1,14 @@
 package top.enchantedgrass.egLibs.items
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize
+import com.fasterxml.jackson.databind.annotation.JsonSerialize
 import org.bukkit.Color
 import org.bukkit.Material
 import org.bukkit.block.banner.Pattern
 import org.bukkit.inventory.ItemFlag
 import org.bukkit.inventory.meta.trim.ArmorTrim
+import top.enchantedgrass.egLibs.jackson.BukkitArmorTrim
+import top.enchantedgrass.egLibs.jackson.BukkitColor
 
 
 /**
@@ -45,7 +49,11 @@ data class FastItemStack(
     val skullTexture: String? = null,
     val leatherArmorColor: Color? = null,
     val bannerPatterns: List<Pattern> = emptyList(),
+    @JsonSerialize(using = BukkitArmorTrim.Serializer::class)
+    @JsonDeserialize(using = BukkitArmorTrim.Deserializer::class)
     val armorTrim: ArmorTrim? = null,
+    @JsonSerialize(using = BukkitColor.Serializer::class)
+    @JsonDeserialize(using = BukkitColor.Deserializer::class)
     val potionColor: Color? = null,
     val merge: FastItemStack? = null,
 )
