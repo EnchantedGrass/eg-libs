@@ -6,38 +6,41 @@ import org.bukkit.block.banner.Pattern
 import org.bukkit.inventory.ItemFlag
 import org.bukkit.inventory.meta.trim.ArmorTrim
 
+
 /**
- * Represents a fast and customizable ItemStack.
+ * The FastItemStack class represents a fast and efficient way to create and manipulate ItemStack objects in Bukkit.
  *
- * @property material The material of the ItemStack.
- * @property amount The amount of the ItemStack.
+ * @property material The Material of the ItemStack.
+ * @property amount The number of items in the ItemStack.
  * @property displayName The display name of the ItemStack.
  * @property lore The lore of the ItemStack.
  * @property customModelData The custom model data of the ItemStack.
- * @property enchants The enchantments of the ItemStack.
- * @property flags The flags of the ItemStack.
- * @property isUnbreakable Whether the ItemStack is unbreakable.
- * @property isGlowing Whether the ItemStack is glowing.
+ * @property enchants The enchantments applied to the ItemStack.
+ * @property flags The flags applied to the ItemStack.
+ * @property isUnbreakable Indicates if the ItemStack is unbreakable.
+ * @property isGlowing Indicates if the ItemStack is glowing.
  * @property nbtTags The NBT tags of the ItemStack.
- * @property damage The durability of the ItemStack.
- * @property skullTexture The skull texture of the ItemStack if it is a player head.
- * @property leatherArmorColor The leather armor color of the ItemStack if it is a leather armor.
- * @property bannerPatterns The banner patterns of the ItemStack if it is a banner.
- * @property armorTrim The armor trim of the ItemStack if it is an armor.
- * @property potionColor The potion color of the ItemStack if it is a potion.
- * @property merge The ItemStack to merge with this ItemStack.
+ * @property damage The damage value of the ItemStack.
+ * @property skullTexture The skull texture of the ItemStack.
+ * @property leatherArmorColor The leather armor color of the ItemStack.
+ * @property bannerPatterns The banner patterns of the ItemStack.
+ * @property armorTrim The armor trim of the ItemStack.
+ * @property potionColor The potion color of the ItemStack.
+ * @property merge The ItemStack to merge with.
+ *
+ * @constructor Creates a new FastItemStack instance.
  */
 data class FastItemStack(
-    var material: Material? = null,
-    var amount: Int? = null,
-    var displayName: String? = null,
-    var lore: String? = null,
-    var customModelData: Int? = null,
-    val enchants: MutableMap<String, Int> = mutableMapOf(),
-    val flags: MutableSet<ItemFlag> = mutableSetOf(),
-    var isUnbreakable: Boolean? = null,
-    var isGlowing: Boolean? = null,
-    val nbtTags: MutableMap<String, Any> = mutableMapOf(),
+    val material: Material? = null,
+    val amount: Int? = null,
+    val displayName: String? = null,
+    val lore: String? = null,
+    val customModelData: Int? = null,
+    val enchants: Map<String, Int> = emptyMap(),
+    val flags: Set<ItemFlag> = emptySet(),
+    val isUnbreakable: Boolean? = null,
+    val isGlowing: Boolean? = null,
+    val nbtTags: Map<String, Any> = emptyMap(),
     val damage: Int? = null,
     val skullTexture: String? = null,
     val leatherArmorColor: Color? = null,
