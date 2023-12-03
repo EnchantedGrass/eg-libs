@@ -30,7 +30,7 @@ class FastItemStackConverter(private val fastStack: FastItemStack) {
      * @param placeholders The list of placeholders to be replaced in the item properties.
      * @return The converted Bukkit ItemStack.
      */
-    fun asBukkit(placeholders: List<Placeholder>): ItemStack {
+    fun asBukkit(placeholders: List<Placeholder> = emptyList()): ItemStack {
         val itemStack = ItemStack(prepareMaterial(), prepareAmount())
         itemStack.editMeta { meta ->
             meta.displayName(prepareDisplayNameComponent(placeholders))
