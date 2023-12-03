@@ -20,10 +20,8 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/build-logic" />
-            <option value="$PROJECT_DIR$/config" />
             <option value="$PROJECT_DIR$/core" />
             <option value="$PROJECT_DIR$/nbt" />
-            <option value="$PROJECT_DIR$/registry" />
           </set>
         </option>
       </GradleProjectSettings>
