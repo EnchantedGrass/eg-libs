@@ -37,7 +37,11 @@ class FastItemStackConverter(private val fastStack: FastItemStack) {
             meta.lore(prepareLoreComponent(placeholders))
             determineProp(FastItemStack::customModelData)?.let { meta.setCustomModelData(it) }
             meta.applyEnchants()
-            setPropIfPresent(FastItemStack::flags) { meta.addItemFlags(*it.toTypedArray()) }
+            setPropIfPresent(FastItemStack::flags) {
+                if (it.isNotEmpty()) {
+                    meta.addItemFlags(*it.toTypedArray())
+                }
+            }
             setPropIfPresent(FastItemStack::isUnbreakable) { meta.isUnbreakable = it }
             meta.applyGlowing()
             meta.applyIfIsInstance<Damageable> {
