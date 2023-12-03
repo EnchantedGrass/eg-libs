@@ -3,6 +3,7 @@ package top.enchantedgrass.egLibs.jackson
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.MapperFeature
 import com.fasterxml.jackson.databind.PropertyNamingStrategies
+import com.fasterxml.jackson.dataformat.yaml.YAMLGenerator
 import com.fasterxml.jackson.dataformat.yaml.YAMLMapper
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 
@@ -23,5 +24,6 @@ object JacksonYaml : JacksonMapperContainer {
         propertyNamingStrategy = PropertyNamingStrategies.KEBAB_CASE
         registerKotlinModule()
         disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+        disable(YAMLGenerator.Feature.WRITE_DOC_START_MARKER)
     }
 }
