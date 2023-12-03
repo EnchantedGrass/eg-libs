@@ -19,7 +19,6 @@ import top.enchantedgrass.egLibs.component.mdcList
 import top.enchantedgrass.egLibs.nbt.NBTItem
 import java.util.*
 
-
 /**
  * Represents a fast and customizable ItemStack.
  *
@@ -179,25 +178,28 @@ data class FastItemStack(
     private fun preparePotionColor() = merge?.potionColor ?: potionColor
 
     private fun ItemStack.applyNbtTags() {
-        val nbtItem = NBTItem(this)
-        prepareNbtTags().forEach { (key, value) ->
-            when (value) {
-                is String -> nbtItem.setString(key, value)
-                is Byte -> nbtItem.setByte(key, value)
-                is ByteArray -> nbtItem.setByteArray(key, value)
-                is Short -> nbtItem.setShort(key, value)
-                is Int -> nbtItem.setInteger(key, value)
-                is IntArray -> nbtItem.setIntArray(key, value)
-                is Long -> nbtItem.setLong(key, value)
-                is LongArray -> nbtItem.setLongArray(key, value)
-                is Float -> nbtItem.setFloat(key, value)
-                is Double -> nbtItem.setDouble(key, value)
-                is Boolean -> nbtItem.setBoolean(key, value)
-                else -> throw IllegalArgumentException("Unsupported NBT type: ${value::class.simpleName}")
-            }
-        }
+        val nbtTags = prepareNbtTags()
+        if (nbtTags.isEmpty()) return
 
-        nbtItem.applyNBT(this)
+        NBTItem(this).run {
+            for ((key, value) in nbtTags) {
+                when (value) {
+                    is String -> setString(key, value)
+                    is Byte -> setByte(key, value)
+                    is ByteArray -> setByteArray(key, value)
+                    is Short -> setShort(key, value)
+                    is Int -> setInteger(key, value)
+                    is IntArray -> setIntArray(key, value)
+                    is Long -> setLong(key, value)
+                    is LongArray -> setLongArray(key, value)
+                    is Float -> setFloat(key, value)
+                    is Double -> setDouble(key, value)
+                    is Boolean -> setBoolean(key, value)
+                    else -> throw IllegalArgumentException("Unsupported NBT type: ${value::class.simpleName}")
+                }
+            }
+            applyNBT(this@applyNbtTags)
+        }
     }
 
     private fun prepareNbtTags() = merge?.nbtTags ?: nbtTags
