@@ -1,6 +1,6 @@
 plugins {
     id("eg-libs.kotlin-conventions")
-    alias(libs.plugins.shadow)
+    alias(libs.plugins.com.github.johnrengelman.shadow)
 }
 
 val itemNbtApi: Configuration by configurations.creating {

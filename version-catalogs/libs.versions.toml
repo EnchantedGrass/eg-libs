@@ -15,4 +15,4 @@ slf4j-api = { module = "org.slf4j:slf4j-api", version.ref = "slf4j" }
 
 [plugins]
 org-jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
-shadow = { id = "com.github.johnrengelman.shadow", version.ref = "shadow" }
+com-github-johnrengelman-shadow = { id = "com.github.johnrengelman.shadow", version.ref = "shadow" }
